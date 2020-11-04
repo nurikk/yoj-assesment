@@ -1,14 +1,12 @@
 
 
 
-import WebSocket from "ws";
-import ReconnectingWebSocket from 'reconnecting-websocket';
 import { loadInstruments } from "../instruments";
 import { Instrument, ExchangeMessage } from "../../types";
 import { getRandomArbitrary } from "../../utils";
 import Scheduler from "../services/scheduler";
-import { injectable, singleton } from "tsyringe";
-
+import { injectable } from "tsyringe";
+import io from "socket.io-client"
 
 
 const getNewPrice = (instrument: Instrument) => {
@@ -18,10 +16,10 @@ const getNewPrice = (instrument: Instrument) => {
   return { ...instrument, transactedPrice, transactedVolume } as Instrument;
 }
 
-@singleton()
+@injectable()
 export default class ExchangeEmulator {
   private instruments: Instrument[];
-  private rws!: ReconnectingWebSocket;
+  private socket!: SocketIOClient.Socket;
 
   constructor(private scheduler: Scheduler) {
     this.instruments = loadInstruments();
@@ -30,21 +28,15 @@ export default class ExchangeEmulator {
   private generateAndPublishNewData = (): void => {
     this.instruments = this.instruments.map(getNewPrice);
     this.instruments.forEach(instrument => {
-
-      const message: ExchangeMessage<Instrument> = {
-        "type": "exchangeData",
-        "timestamp": new Date().getTime(),
-        "payload": instrument
-      };
-      this.rws.send(JSON.stringify(message));
-    })
-
+      this.socket.emit('exchangeData', instrument)
+    });
   }
 
 
   public start(appHost: string, updateRate: number): void {
-    this.rws = new ReconnectingWebSocket(appHost, [], { WebSocket });
+    this.socket = io(appHost, {
+      path: '/exchange'
+    });
     this.scheduler.schedule(this.generateAndPublishNewData, updateRate);
-
   }
 }

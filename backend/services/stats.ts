@@ -11,7 +11,7 @@ export default class StatsProcessor {
   constructor(private messageBus: MessageBus, private scheduler: Scheduler) {
     this.avgStats = new Map<string, InstrumentStats>();
     messageBus.on("exchange-instruments", this.calculateIntermidiateStates);
-    scheduler.scheduleDefault(this.publishAndClearCurrentStats);
+    scheduler.schedule(this.publishAndClearCurrentStats, 5000);
   }
   public publishAndClearCurrentStats = (): void => {
     this.avgStats.forEach((stats, stockName) => {
