@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Stock A",
+    "transactedPrice": 1.0,
+    "transactedVolume": 10.0
+  },
+  {
+    "name": "Stock B",
+    "transactedPrice": 1.0,
+    "transactedVolume": 10.0
+  }
+]
