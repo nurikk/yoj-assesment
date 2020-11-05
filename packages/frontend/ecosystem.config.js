@@ -6,8 +6,8 @@ module.exports = {
     },
     {
       name: 'frontent-static',
-      script: 'serve',
-      args: '-s build',
+      script: 'pm2',
+      args: 'serve build',
       instances: 1
     }
   ]
