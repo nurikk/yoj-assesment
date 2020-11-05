@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 
 import './App.css';
 import { InstrumentStatsBroadcastMessage } from '@yoj/common';
-const ENDPOINT = `http://${document.location.hostname}:${document.location.port}/`;
+const ENDPOINT = `${document.location.protocol}://${document.location.hostname}:${document.location.port}/`;
 
 function App() {
   const [response, setResponse] = useState<InstrumentStatsBroadcastMessage[]>([]);
