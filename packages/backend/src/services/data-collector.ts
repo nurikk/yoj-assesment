@@ -1,5 +1,7 @@
 import { singleton } from "tsyringe";
-import { InstrumentStats, Instrument } from "../../types";
+import { Instrument } from "@yoj/common";
+
+
 import MessageBus from "./message-bus";
 import Scheduler from "./scheduler";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import socketIOClient from "socket.io-client";
 
 import './App.css';
-import { InstrumentStatsBroadcastMessage } from './types';
+import { InstrumentStatsBroadcastMessage } from '@yoj/common';
 const ENDPOINT = `http://${document.location.hostname}:${document.location.port}/`;
 
 function App() {

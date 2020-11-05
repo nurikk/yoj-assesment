@@ -1,12 +1,4 @@
-
-
-
-
-
-
-
-import { createServer, IncomingMessage, Server } from 'http';
-import { Server as NetServer, Socket } from "net";
+import { createServer, Server } from 'http';
 import MessageBus from '../services/message-bus';
 import { singleton } from 'tsyringe';
 
@@ -18,7 +10,6 @@ export default class BrokerServer {
     this.server = createServer();
   }
 
-
   public listen(port: number) {
     this.server.listen(port);
   }
@@ -27,5 +18,3 @@ export default class BrokerServer {
     io.attach(this.server);
   }
 }
-
-

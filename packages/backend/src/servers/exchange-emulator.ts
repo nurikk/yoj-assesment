@@ -2,11 +2,12 @@
 
 
 import { loadInstruments } from "../instruments";
-import { Instrument, ExchangeMessage } from "../../types";
-import { getRandomArbitrary } from "../../utils";
+
 import Scheduler from "../services/scheduler";
 import { injectable } from "tsyringe";
 import io from "socket.io-client"
+import { Instrument } from "@yoj/common";
+import { getRandomArbitrary } from "../utils";
 
 
 const getNewPrice = (instrument: Instrument) => {

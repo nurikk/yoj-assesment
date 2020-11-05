@@ -1,7 +1,8 @@
 import { singleton } from "tsyringe";
 
 import { EventEmitter } from "events";
-import { Instrument, InstrumentStats, InstrumentStatsBroadcastMessage } from "../../types";
+import { Instrument, InstrumentStatsBroadcastMessage } from "@yoj/common";
+
 
 
 

@@ -3,7 +3,7 @@ import { createServer } from "http";
 
 import socketIo from "socket.io";
 import socketIoClient from "socket.io-client";
-import { Instrument, InstrumentStatsBroadcastMessage } from "./types";
+import { Instrument, InstrumentStatsBroadcastMessage } from "@yoj/common";
 
 const PORT = process.env.PORT || 4001;
 const BROKER_HOST = process.env.BROKER_HOST || "ws://localhost:8900";

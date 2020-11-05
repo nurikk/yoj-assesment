@@ -1,14 +1,15 @@
 import { singleton } from "tsyringe";
-import { ExchangeMessage, Instrument } from "../../types";
-import MessageBus from "../services/message-bus";
-import BrokerServer from "./broker";
 
+import MessageBus from "../services/message-bus";
+import { Instrument } from "@yoj/common";
+import BrokerServer from "./broker";
+import socketIo from "socket.io";
 @singleton()
 export default class ExchangeListener {
-  private io: SocketIO.Server;
+  private io: socketIo.Server;
 
   constructor(private appServer: BrokerServer, private messageBus: MessageBus) {
-    this.io = require('socket.io')({
+    this.io = socketIo({
       path: '/exchange',
       serveClient: false,
     });

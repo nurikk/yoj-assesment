@@ -1,6 +1,5 @@
 import { singleton } from "tsyringe";
 
-
 @singleton()
 export default class Scheduler {
   private defaultTick = 5 * 1000;
@@ -12,5 +11,4 @@ export default class Scheduler {
   public schedule(fn: () => void, interval: number): NodeJS.Timeout {
     return setInterval(fn, interval);
   }
-
 }

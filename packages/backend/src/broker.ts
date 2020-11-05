@@ -1,12 +1,13 @@
 import "reflect-metadata";
 
 import { container } from "tsyringe";
-import BrokerServer from "./backend/servers/broker";
-import ExchangeListener from "./backend/servers/exchange-listener";
-import DataCollector from "./backend/services/data-collector";
-import StatsProcessor from "./backend/services/stats";
-import Scheduler from "./backend/services/scheduler";
-import ClientsServer from "./backend/servers/clients-server";
+import BrokerServer from "./servers/broker";
+import ClientsServer from "./servers/clients-server";
+import ExchangeListener from "./servers/exchange-listener";
+import DataCollector from "./services/data-collector";
+import Scheduler from "./services/scheduler";
+import StatsProcessor from "./services/stats";
+
 
 const BROKERAGE_APP_PORT = process.env.BROKERAGE_APP_PORT || 8900;
 

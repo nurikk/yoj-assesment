@@ -1,33 +1,19 @@
 {
-  "name": "yoj",
+  "name": "@yoj/main",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "ecosystem.config.js",
+  "dependencies": {
+    "pm2": "^4.5.0"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "concurrently \"npm:start-*\"",
-    "start-broker": "nodemon broker.ts",
-    "start-exchange": "nodemon exchange.ts",
-    "start-frontend": "nodemon frontent.ts",
-    "build": "tsc --project ./",
+    "bootstrap": "lerna bootstrap",
     "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/node": "^14.14.6",
-    "@types/socket.io": "^2.1.11",
-    "@types/socket.io-client": "^1.4.34",
-    "concurrently": "^5.3.0",
-    "nodemon": "^2.0.6",
-    "pm2": "^4.5.0",
-    "reflect-metadata": "^0.1.13",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.1",
-    "ts-node": "^9.0.0",
-    "tsyringe": "^4.3.0",
-    "typescript": "^4.0.5"
-  },
-  "devDependencies": {}
+  "license": "ISC"
 }

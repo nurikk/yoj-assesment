@@ -1,17 +1,16 @@
 module.exports = {
     apps: [{
-            name: "frontent",
-            script: "./build/frontent.js",
+            cwd: "./packages/frontend",
+            name: "frontend",
+            script: "npm",
+            args: "run start",
             instances: 1
         },
         {
-            name: "broker",
-            script: "./build/broker.js",
-            instances: 1
-        },
-        {
-            name: "exchange",
-            script: "./build/exchange.js",
+            cwd: "./packages/backend",
+            name: "backend",
+            script: "npm",
+            args: "run start",
             instances: 1
         }
     ]
