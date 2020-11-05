@@ -15,8 +15,8 @@ app.use(express.static('./build'));
 app.set("port", PORT);
 const server = createServer(app);
 
-
 const io = socketIo(server);
+
 const brokerSocker = socketIoClient(BROKER_HOST, {
   path: "/clients"
 });

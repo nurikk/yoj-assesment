@@ -3,12 +3,11 @@ import socketIOClient from "socket.io-client";
 
 import './App.css';
 import { InstrumentStatsBroadcastMessage } from '@yoj/common';
-const ENDPOINT = window.location;
 
 function App() {
   const [response, setResponse] = useState<InstrumentStatsBroadcastMessage[]>([]);
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient();
     socket.on("instrument-stats", (statMessage: InstrumentStatsBroadcastMessage) => {
       setResponse(oldData => [...oldData, statMessage]);
     });
