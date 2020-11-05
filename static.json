@@ -1,4 +1,9 @@
 {
   "root": "packages/frontend/build/",
-  "clean_urls": false
+  "clean_urls": false,
+  "proxies": {
+    "/socket.io/": {
+      "origin": "https://localhost:4001/socket.io/"
+    }
+  }
 }
