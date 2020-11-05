@@ -17,14 +17,15 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
     "serve": "^11.3.2",
+    "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "start:dev": "react-scripts start",
-    "build": "tsc --project tsconfig.server.json && react-scripts build",
+    "build": "react-scripts build && tsc --project tsconfig.server.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

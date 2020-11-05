@@ -1,7 +1,14 @@
 module.exports = {
-    apps: [{
-        name: "frontent",
-        script: "./build/frontent.js",
-        instances: 1
-    }]
+  apps: [{
+      name: 'frontent-api',
+      script: './build/server.js',
+      instances: 1
+    },
+    {
+      name: 'frontent-static',
+      script: 'serve',
+      args: '-s build',
+      instances: 1
+    }
+  ]
 }
