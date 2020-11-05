@@ -9,5 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "types": "./src/types.d.ts"
+  "types": "./src/types.d.ts",
+  "dependencies": {
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0"
+  }
 }
