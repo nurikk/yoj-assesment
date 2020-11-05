@@ -6,8 +6,11 @@ module.exports = {
     },
     {
       name: 'frontent-static',
-      script: 'pm2',
-      args: 'serve build',
+      script: 'serve',
+      env: {
+        PM2_SERVE_PATH: '.build',
+        PM2_SERVE_PORT: 8080
+      },
       instances: 1
     }
   ]
