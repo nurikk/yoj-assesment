@@ -7,8 +7,7 @@ import { Stock } from "../entity/stock";
 export default class Db {
   constructor() {
     createConnection().then(async connection => {
-      const stocks = await connection.manager.find(Stock);
-      console.log("Loaded stocks: ", stocks);
+      console.log("Connected to db");
     }).catch(error => console.log(error));
   }
 
