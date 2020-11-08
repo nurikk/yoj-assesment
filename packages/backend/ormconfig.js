@@ -1,8 +1,11 @@
-const rootDir = process.env.NODE_ENV === "production" ?
+const path = require('path');
+let rootDir = process.env.NODE_ENV === "production" ?
     "build" :
     "src"
-
-console.log('process.env', process.env);
+rootDir = path.join(__dirname, rootDir);
+console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('rootDir', rootDir);
 module.exports = {
     "type": "postgres",
     "url": process.env.DATABASE_URL,
@@ -10,10 +13,8 @@ module.exports = {
     "logging": false,
     "entities": [
         rootDir + "/entity/**/*.{js,ts}",
-
     ],
     "migrations": [
-
         rootDir + "/migration/**/*.{js,ts}",
     ],
     "subscribers": [

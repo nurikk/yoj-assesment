@@ -11,8 +11,7 @@ module.exports = {
             script: "build/broker.js",
             instances: 1,
             env: {
-                NODE_ENV: "production",
-                DATABASE_URL: process.env.DATABASE_URL
+                NODE_ENV: "production"
             }
         }, {
             cwd: "./packages/backend",
