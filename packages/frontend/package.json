@@ -29,8 +29,7 @@
     "start:dev": "concurrently \"npm:start-*\"",
     "start-front": "react-scripts start",
     "start-back": "TS_NODE_PROJECT=tsconfig.server.json nodemon src/server.ts",
-    "build2": "react-scripts build && tsc --project tsconfig.server.json",
-    "build": "tsc --project tsconfig.server.json",
+    "build": "react-scripts build && tsc --project tsconfig.server.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

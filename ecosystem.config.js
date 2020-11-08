@@ -6,19 +6,25 @@ module.exports = {
             instances: 1
         },
         {
-            cwd: "./packages/backend/build",
+            cwd: "./packages/backend",
             name: "broker",
-            script: "broker.js",
+            script: "build/broker.js",
             instances: 1,
-            interpreter: 'node',
-            interpreter_args: '--require ts-node/register'
+            env: {
+                "NODE_ENV": "production",
+              }
+            // interpreter: 'node',
+            // interpreter_args: '--require ts-node/register'
         }, {
-            cwd: "./packages/backend/build",
+            cwd: "./packages/backend",
             name: "exchange",
-            script: "exchange.js",
+            script: "build/exchange.js",
             instances: 1,
-            interpreter: 'node',
-            interpreter_args: '--require ts-node/register'
+            env: {
+                "NODE_ENV": "production",
+              }
+            // interpreter: 'node',
+            // interpreter_args: '--require ts-node/register'
         }
     ]
 }

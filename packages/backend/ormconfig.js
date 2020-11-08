@@ -1,21 +1,25 @@
-console.log('ormconfig', process.env.DATABASE_URL);
+const rootDir = process.env.NODE_ENV === "production" ?
+    "build" :
+    "src"
 module.exports = {
-   "type": "postgres",
-   "url": process.env.DATABASE_URL,
-   "synchronize": true,
-   "logging": false,
-   "entities": [
-       "./entity/*.{js,ts}"
-   ],
-   "migrations": [
-       "./migration/**/*.{js,ts}"
-   ],
-   "subscribers": [
-       "./subscriber/**/*.{js,ts}"
-   ],
-   "cli": {
-      "entitiesDir":  "./entity",
-      "migrationsDir":  "./migration",
-      "subscribersDir":  "./subscriber"
-   }
+    "type": "postgres",
+    "url": process.env.DATABASE_URL,
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+        rootDir + "/entity/**/*.{js,ts}",
+
+    ],
+    "migrations": [
+
+        rootDir + "/migration/**/*.{js,ts}",
+    ],
+    "subscribers": [
+        rootDir + "/subscriber/**/*.{js,ts}",
+    ],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+    }
 }
