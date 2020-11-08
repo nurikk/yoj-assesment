@@ -1,6 +1,6 @@
 module.exports = {
-   "type": "sqlite",
-   "database": "database.sqlite",
+   "type": "postgres",
+   "url": process.env.DATABASE_URL,
    "synchronize": true,
    "logging": false,
    "entities": [
