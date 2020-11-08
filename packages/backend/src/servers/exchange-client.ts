@@ -1,4 +1,4 @@
-import { singleton } from "tsyringe";
+import { delay, inject, singleton } from "tsyringe";
 
 import MessageBus from "../services/message-bus";
 import { Instrument } from "@yoj/common";
@@ -10,7 +10,7 @@ import { Stock } from "../entity/stock";
 export default class ExchangeClient {
   private io: SocketIOClient.Socket;
 
-  constructor(private messageBus: MessageBus, private db: Db) { }
+  constructor(private messageBus: MessageBus, @inject(delay(() => Db)) private db: Db) { }
 
   public async connect(exchangeHost: string) {
     this.io = io.connect(exchangeHost);

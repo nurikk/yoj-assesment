@@ -1,4 +1,4 @@
-import { singleton } from "tsyringe";
+import { delay, inject, singleton } from "tsyringe";
 
 
 import MessageBus from "../services/message-bus";
@@ -13,7 +13,7 @@ import { Stock } from "../entity/stock";
 export default class ClientsServer {
   private io: io.Server;
 
-  constructor(private appServer: BrokerServer, private messageBus: MessageBus, private db: Db) {
+  constructor(private appServer: BrokerServer, private messageBus: MessageBus, @inject(delay(() => Db)) private db: Db) {
     this.io = io({
       path: '/clients',
       serveClient: false,
