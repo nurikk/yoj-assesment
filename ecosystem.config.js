@@ -6,15 +6,19 @@ module.exports = {
             instances: 1
         },
         {
-            cwd: "./packages/backend",
+            cwd: "./packages/backend/build",
             name: "broker",
-            script: "./src/broker.ts",
-            instances: 1
+            script: "broker.js",
+            instances: 1,
+            interpreter: 'node',
+            interpreter_args: '--require ts-node/register'
         }, {
-            cwd: "./packages/backend",
+            cwd: "./packages/backend/build",
             name: "exchange",
-            args: "./src/exchange.ts",
-            instances: 1
+            script: "exchange.js",
+            instances: 1,
+            interpreter: 'node',
+            interpreter_args: '--require ts-node/register'
         }
     ]
 }
