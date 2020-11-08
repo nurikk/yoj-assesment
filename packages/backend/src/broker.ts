@@ -1,21 +1,24 @@
 import "reflect-metadata";
 
 import { container } from "tsyringe";
-import BrokerServer from "./servers/broker";
+import HttpServer from "./servers/http-server";
 import ClientsServer from "./servers/clients-server";
-import ExchangeListener from "./servers/exchange-listener";
+
 import DataCollector from "./services/data-collector";
 import Scheduler from "./services/scheduler";
 import StatsProcessor from "./services/stats";
+import Db from "./services/db";
+import ExchangeClient from "./servers/exchange-client";
 
 
 const BROKERAGE_APP_PORT = process.env.BROKERAGE_APP_PORT || 8900;
+const EXCHANGE_HOST = process.env.EXCHANGE_HOST || `ws://localhost:8901`;
 
-const brokerServer = container.resolve(BrokerServer);
-container.resolve(ExchangeListener);
+const httpServer = container.resolve(HttpServer);
+container.resolve(Db);
 container.resolve(DataCollector);
 container.resolve(StatsProcessor);
 container.resolve(Scheduler);
 container.resolve(ClientsServer);
-
-brokerServer.listen(BROKERAGE_APP_PORT as number);
+container.resolve(ExchangeClient).connect(EXCHANGE_HOST).then();
+httpServer.listen(BROKERAGE_APP_PORT as number);

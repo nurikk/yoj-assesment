@@ -3,7 +3,7 @@ import MessageBus from '../services/message-bus';
 import { singleton } from 'tsyringe';
 
 @singleton()
-export default class BrokerServer {
+export default class HttpServer {
   private server: Server;
 
   constructor(private messageBus: MessageBus) {
@@ -11,7 +11,9 @@ export default class BrokerServer {
   }
 
   public listen(port: number) {
-    this.server.listen(port);
+    this.server.listen(port, () => {
+      console.log("Started", port);
+    });
   }
 
   public registerWebsoketServer(io: SocketIO.Server) {

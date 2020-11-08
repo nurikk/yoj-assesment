@@ -1,13 +1,11 @@
 
-
-
-import { loadInstruments } from "../instruments";
-
 import Scheduler from "../services/scheduler";
 import { injectable } from "tsyringe";
-import io from "socket.io-client"
+import io from "socket.io"
 import { Instrument } from "@yoj/common";
 import { getRandomArbitrary } from "../utils";
+import HttpServer from "./http-server";
+
 
 
 const getNewPrice = (instrument: Instrument) => {
@@ -19,25 +17,33 @@ const getNewPrice = (instrument: Instrument) => {
 
 @injectable()
 export default class ExchangeEmulator {
-  private instruments: Instrument[];
-  private socket!: SocketIOClient.Socket;
+  private instruments: Map<string, Instrument>;
+  private io: io.Server;
 
-  constructor(private scheduler: Scheduler) {
-    this.instruments = loadInstruments();
+  constructor(private scheduler: Scheduler, private httpServer: HttpServer,) {
+    this.instruments = new Map<string, Instrument>();
+    this.io = io();
+    this.io.on("connection", (socket) => socket.on("subscribe", this.handleSubscribtion))
+    this.httpServer.registerWebsoketServer(this.io);
+    this.scheduler.schedule(this.generateAndPublishNewData, 1000);
   }
 
+  private handleSubscribtion = (name: string): void => {
+    console.log("handleSubscribtion", name);
+    if (!this.instruments.has(name)) {
+      this.instruments.set(name, {
+        name,
+        transactedPrice: 1,
+        transactedVolume: 10
+      });
+    };
+  }
   private generateAndPublishNewData = (): void => {
-    this.instruments = this.instruments.map(getNewPrice);
-    this.instruments.forEach(instrument => {
-      this.socket.emit('exchangeData', instrument)
+    this.instruments.forEach((instrument, name) => {
+      const updated = getNewPrice(instrument);
+      this.io.emit('exchangeData', updated);
+      this.instruments.set(name, updated);
     });
   }
 
-
-  public start(appHost: string, updateRate: number): void {
-    this.socket = io(appHost, {
-      path: '/exchange'
-    });
-    this.scheduler.schedule(this.generateAndPublishNewData, updateRate);
-  }
 }

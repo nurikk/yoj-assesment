@@ -1,10 +1,12 @@
 import "reflect-metadata";
 import { container } from "tsyringe";
 import ExchangeEmulator from "./servers/exchange-emulator";
+import HttpServer from "./servers/http-server";
 import Scheduler from "./services/scheduler";
 
-
-const APP_HOST = process.env.APP_HOST || `ws://localhost:8900`;
-
+const EXCHANGE_APP_PORT = process.env.EXCHANGE_APP_PORT || 8901;
+const httpServer = container.resolve(HttpServer);
 container.resolve(Scheduler);
-container.resolve(ExchangeEmulator).start(APP_HOST, 1000);
+container.resolve(ExchangeEmulator);
+
+httpServer.listen(EXCHANGE_APP_PORT as number);
