@@ -1,7 +1,5 @@
 import { singleton } from "tsyringe";
 import { Connection, createConnection, getConnection } from "typeorm";
-import { Stock } from "../entity/stock";
-
 
 @singleton()
 export default class Db {
