@@ -1,6 +1,8 @@
 const rootDir = process.env.NODE_ENV === "production" ?
     "build" :
     "src"
+
+console.log('process.env', process.env);
 module.exports = {
     "type": "postgres",
     "url": process.env.DATABASE_URL,

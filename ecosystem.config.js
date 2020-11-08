@@ -11,20 +11,17 @@ module.exports = {
             script: "build/broker.js",
             instances: 1,
             env: {
-                "NODE_ENV": "production",
-              }
-            // interpreter: 'node',
-            // interpreter_args: '--require ts-node/register'
+                NODE_ENV: "production",
+                DATABASE_URL: process.env.DATABASE_URL
+            }
         }, {
             cwd: "./packages/backend",
             name: "exchange",
             script: "build/exchange.js",
             instances: 1,
             env: {
-                "NODE_ENV": "production",
-              }
-            // interpreter: 'node',
-            // interpreter_args: '--require ts-node/register'
+                NODE_ENV: "production"
+            }
         }
     ]
 }
