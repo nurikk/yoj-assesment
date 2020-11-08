@@ -1,11 +1,15 @@
 module.exports = {
     apps: [{
         name: "broker",
-        script: "./build/broker.js",
-        instances: 1
+        script: "./src/broker.ts",
+        instances: 1,
+        interpreter: 'node',
+        interpreter_args: '--require ts-node/register'
     }, {
         name: "exchange",
-        script: "./build/exchange.js",
-        instances: 1
+        script: "./src/exchange.ts",
+        instances: 1,
+        interpreter: 'node',
+        interpreter_args: '--require ts-node/register'
     }]
 }
