@@ -11,8 +11,11 @@ module.exports = {
     "url": process.env.DATABASE_URL,
     "synchronize": true,
     "logging": false,
+    "ssl": true,
     "extra": {
-        "ssl": true
+        "ssl": {
+            "rejectUnauthorized": false,
+        }
     },
     "entities": [
         rootDir + "/entity/**/*.{js,ts}",
