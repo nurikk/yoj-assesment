@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "ecosystem.config.js",
-  "dependencies": {
-    "pm2": "^4.5.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "lerna": "^3.22.1"
   },
   "scripts": {
-    "postinstall": "pm2 install typescript && npm run bootstrap",
+    "postinstall": "npm install -g pm2 && pm2 install typescript && npm run bootstrap",
     "bootstrap": "lerna bootstrap",
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "lerna run build"

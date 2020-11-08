@@ -23,7 +23,6 @@
     "@yoj/common": "^1.0.0",
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.6",
-    "pm2": "^4.5.0",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
