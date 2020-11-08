@@ -26,6 +26,7 @@ export default class DataCollector {
   }
 
   public presistCurrentBuffer = (): void => {
-    console.log("Persisting current buffer");
+    console.log("Persisting current buffer, not implemented");
+    this.messagesBuffer.clear();
   }
 }
