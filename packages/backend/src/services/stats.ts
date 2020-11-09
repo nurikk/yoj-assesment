@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import { InstrumentStats, Instrument } from "@yoj/common";
+import { InstrumentStats, InstrumentTradingRecord } from "@yoj/common";
 
 
 
@@ -24,7 +24,7 @@ export default class StatsProcessor {
     })
   }
 
-  private calculateIntermidiateStates = (instrument: Instrument): void => {
+  private calculateIntermidiateStates = (instrument: InstrumentTradingRecord): void => {
     const { name, transactedPrice, transactedVolume } = instrument;
     const currentStats = this.avgStats.get(name) || {
       openingPrice: transactedPrice,

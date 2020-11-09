@@ -4,10 +4,11 @@ export type InstrumentStats = {
   transactedVolumeTotal: number;
 }
 
-export type Instrument = {
+export type InstrumentTradingRecord = {
   name: string;
   transactedPrice: number;
   transactedVolume: number;
+  timestamp: Date;
 }
 
 export type ExchangeMessageType = "exchangeData";

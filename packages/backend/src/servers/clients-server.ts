@@ -6,7 +6,7 @@ import { InstrumentStatsBroadcastMessage } from "@yoj/common";
 import BrokerServer from "./http-server";
 import io from "socket.io";
 import Db from "../services/db";
-import { Stock } from "../entity/stock";
+import { Stock } from "../entity/Stock";
 
 
 @singleton()

@@ -1,32 +1,39 @@
 import { singleton } from "tsyringe";
-import { Instrument } from "@yoj/common";
+import { InstrumentTradingRecord } from "@yoj/common";
 
 
 import MessageBus from "./message-bus";
 import Scheduler from "./scheduler";
+import { TradeLog } from "../entity/TradeLog";
+import Db from "./db";
 
 
+const PURGE_INTEVAL = 5 * 60 * 1000;
 @singleton()
 export default class DataCollector {
-  private messagesBuffer: Map<string, Instrument[]>;
+  private messagesBuffer: InstrumentTradingRecord[];
 
-  constructor(private messageBus: MessageBus, private scheduler: Scheduler) {
-    this.messagesBuffer = new Map<string, Instrument[]>();
+  constructor(private messageBus: MessageBus,
+    private scheduler: Scheduler,
+    private db: Db
+  ) {
+    this.messagesBuffer = [];
     messageBus.on("exchange-instruments", this.saveMessageBuffer);
     this.scheduler.scheduleDefault(this.presistCurrentBuffer);
+    this.scheduler.schedule(this.purgeData, PURGE_INTEVAL); //purge data, (free heroku account has 10k rows limit)
   }
 
-  private saveMessageBuffer = (instrument: Instrument): void => {
-    const { name } = instrument;
-    if (this.messagesBuffer.has(name)) {
-      this.messagesBuffer.get(name)?.push(instrument);
-    } else {
-      this.messagesBuffer.set(name, [instrument]);
-    }
+  private saveMessageBuffer = (instrument: InstrumentTradingRecord): void => {
+    this.messagesBuffer.push(instrument);
   }
 
-  public presistCurrentBuffer = (): void => {
-    console.log("Persisting current buffer, not implemented");
-    this.messagesBuffer.clear();
+  private purgeData = async () => {
+    await this.db.getConnection().manager.getRepository(TradeLog).clear();
+  }
+
+  public presistCurrentBuffer = async () => {
+    console.log("Persisting current buffer");
+    await this.db.getConnection().manager.getRepository(TradeLog).save(this.messagesBuffer);
+    this.messagesBuffer = [];
   }
 }

@@ -1,5 +1,5 @@
 import {getRepository, MigrationInterface, QueryRunner} from "typeorm";
-import { Stock } from "../entity/stock";
+import { Stock } from "../entity/Stock";
 import { SeedStocks } from  "../seed/stock.seed"
 
 export class SeedStocks1604869443447 implements MigrationInterface {
