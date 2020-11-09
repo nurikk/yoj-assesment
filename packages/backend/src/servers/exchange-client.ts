@@ -19,8 +19,10 @@ export default class ExchangeClient {
     this.io.on("exchangeData", this.onExchangeData);
   }
   private onConnect = async () => {
+    console.log("connected to exchange");
     const connection = this.db.getConnection();
     const stocks = await connection.manager.find(Stock);
+    console.log("read traded stocks", stocks);
     stocks.forEach((stock) => {
       console.log("Subscribe", stock.name);
       this.io.emit("subscribe", stock.name);
