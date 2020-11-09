@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import io from "socket.io-client";
 
 import './App.css';
-import { Instrument, InstrumentStatsBroadcastMessage } from '@yoj/common';
+import { InstrumentTradingRecord, InstrumentStatsBroadcastMessage } from '@yoj/common';
 import Tabs from './components/tabs';
 import Tab from './components/tabs/Tab';
 import StocksTable from './components/stocks-table/Stoks';
@@ -17,7 +17,7 @@ function getSorter<T, K extends keyof T>(column: K) {
 }
 
 function App() {
-  const [stocks, setStocks] = useState<Instrument[]>([]);
+  const [stocks, setStocks] = useState<InstrumentTradingRecord[]>([]);
   const [stocksStatistics, setStocksStatistics] = useState<InstrumentStatsBroadcastMessage[]>([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
     socket.io.on('connection', (socket: SocketIOClient.Socket) => {
       console.log(socket);
     });
-    socket.on("avaliable-stocks", (data: Instrument[]) => {
+    socket.on("avaliable-stocks", (data: InstrumentTradingRecord[]) => {
       setStocks(data);
     })
 

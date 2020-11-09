@@ -5,12 +5,12 @@ import express from "express";
 
 import socketIo from "socket.io";
 import socketIoClient from "socket.io-client";
-import { Instrument, InstrumentStatsBroadcastMessage } from "@yoj/common";
+import { InstrumentTradingRecord, InstrumentStatsBroadcastMessage } from "@yoj/common";
 
 const PORT = process.env.PORT || 4001;
 const BROKER_HOST = process.env.BROKER_HOST || "ws://localhost:8900";
 
-let avaliableStocks: Instrument[] = [];
+let avaliableStocks: InstrumentTradingRecord[] = [];
 
 const app = express();
 app.use(express.static('./build'));
@@ -34,7 +34,7 @@ brokerSocker.on("instrument-stats", (instrument: InstrumentStatsBroadcastMessage
   io.emit("instrument-stats", instrument);
 });
 
-brokerSocker.on("avaliable-stocks", (stocks: Instrument[]) => {
+brokerSocker.on("avaliable-stocks", (stocks: InstrumentTradingRecord[]) => {
   avaliableStocks = stocks;
 });
 
