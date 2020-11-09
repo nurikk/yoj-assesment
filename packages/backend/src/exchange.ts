@@ -6,12 +6,11 @@ import HttpServer from "./servers/http-server";
 import Scheduler from "./services/scheduler";
 
 
-createConnection().then(async connection => {
-  const EXCHANGE_APP_PORT = process.env.EXCHANGE_APP_PORT || 8901;
-  const httpServer = container.resolve(HttpServer);
-  container.resolve(Scheduler);
-  container.resolve(ExchangeEmulator);
 
-  httpServer.listen(EXCHANGE_APP_PORT as number);
-}).catch(error => console.log(error));
+const EXCHANGE_APP_PORT = process.env.EXCHANGE_APP_PORT || 8901;
+const httpServer = container.resolve(HttpServer);
+container.resolve(Scheduler);
+container.resolve(ExchangeEmulator);
+httpServer.listen(EXCHANGE_APP_PORT as number);
+
 
