@@ -13,3 +13,13 @@ To scale app up to 1M - implemten proper stock based subscribtions (reduce broke
 
 ![App diagram](./doc/schema.png)
 
+
+
+# Develop
+```bash
+npm install
+npm run dev
+```
+
+# Tech stack
+typescript, reactjs, postgresq, socket.io, lerna, tsyringe
