@@ -4,7 +4,7 @@ import { InstrumentTradingRecord } from "@yoj/common";
 
 import MessageBus from "./message-bus";
 import Scheduler from "./scheduler";
-import { TradeLog } from "../entity/TradeLog";
+import { TradeLog } from "../entity/trade_log";
 import Db from "./db";
 
 

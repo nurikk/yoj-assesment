@@ -5,7 +5,7 @@ import { InstrumentTradingRecord } from "@yoj/common";
 
 import io from "socket.io-client";
 import Db from "../services/db";
-import { Stock } from "../entity/Stock";
+import { Stock } from "../entity/stock";
 @singleton()
 export default class ExchangeClient {
   private io: SocketIOClient.Socket;
